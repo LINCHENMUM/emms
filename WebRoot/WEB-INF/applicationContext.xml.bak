@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/zssysbwx"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="mysql"></property>
+		
+		<property name="maxActive" value="20" /><!-- 连接池的最大活动个数 -->
+    <property name="maxIdle" value="50" /><!-- 没有人用连接的时候，最大闲置的连接个数 -->
+    <property name="maxWait" value="1000" /><!-- 超时等待时间以毫秒为单位  -->
+    <property name="removeAbandoned" value="true" /><!--是否自动回收超时连接  -->
+    <property name="removeAbandonedTimeout" value="60" /><!-- 设置被遗弃的连接的超时的时间（以秒数为单位），即当一个连接被遗弃的时间超过设置的时间，则它会自动转换成可利用的连接。默认的超时时间是300秒 -->
+    <property name="logAbandoned" value="true" /><!-- 是否在自动回收超时连接的时候打印连接的超时错误 -->
+
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.current_session_context_class">
+					thread
+				</prop>
+				<prop key="hibernate.transaction.factory_class">
+					org.hibernate.transaction.JDBCTransactionFactory
+				</prop>
+			</props>
+		</property>
+		<!-- 一定要配表的实体类 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/zssy/sbwx/user/model/User.hbm.xml</value>
+				<value>com/zssy/sbwx/manage/model/BorrowReturn.hbm.xml</value>
+				<value>com/zssy/sbwx/org/model/Org.hbm.xml</value>
+				<value>com/zssy/sbwx/manage/model/Device.hbm.xml</value>
+				<value>com/zssy/sbwx/log/model/LoginRecord.hbm.xml</value>
+				<value>com/zssy/sbwx/log/model/OperateRecord.hbm.xml</value>
+				<value>com/zssy/sbwx/repair/model/Repair.hbm.xml</value>
+				<value>com/zssy/sbwx/notebook/model/NoteBook.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- =============== 用户管理===============  -->
+	<bean id="UserDAO" class="com.zssy.sbwx.user.dao.UserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="UserService"
+		class="com.zssy.sbwx.user.service.UserService">
+		<property name="dao">
+			<ref bean="UserDAO" />
+		</property>
+	</bean>
+	<bean name="addUserBean" class="com.zssy.sbwx.user.web.UserAction"
+		scope="prototype">
+		<property name="service">
+			<ref bean="UserService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="listUserBean" class="com.zssy.sbwx.user.web.UserAction"
+		scope="prototype">
+		<property name="service">
+			<ref bean="UserService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="deleteUserBean" class="com.zssy.sbwx.user.web.UserAction"
+		scope="prototype">
+		<property name="service">
+			<ref bean="UserService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="editUserBean" class="com.zssy.sbwx.user.web.UserAction"
+		scope="prototype">
+		<property name="service">
+			<ref bean="UserService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="updateUserBean" class="com.zssy.sbwx.user.web.UserAction"
+		scope="prototype">
+		<property name="service">
+			<ref bean="UserService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="loginBean" class="com.zssy.sbwx.user.web.UserAction"
+		scope="prototype">
+		<property name="service">
+			<ref bean="UserService" />
+		</property>
+		<property name="loginService">
+			<ref bean="LoginService"/>
+		</property>
+	</bean>
+	<bean name="logoutBean" class="com.zssy.sbwx.user.web.UserAction"
+		scope="prototype">
+		<property name="service">
+			<ref bean="UserService" />
+		</property>
+		<property name="loginService">
+			<ref bean="LoginService"/>
+		</property>
+	</bean>
+		<!-- ==============    登录日志管理       ============= -->
+	<bean id="LoginDAO"
+		class="com.zssy.sbwx.log.dao.LoginDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LoginService"
+		class="com.zssy.sbwx.log.service.LoginService">
+		<property name="loginDAO">
+			<ref bean="LoginDAO" />
+		</property>
+	</bean>
+	
+	<!-- ==============    操作日志管理       ============= -->
+	<bean id="OperateDAO"
+		class="com.zssy.sbwx.log.dao.OperateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="OperateService"
+		class="com.zssy.sbwx.log.service.OperateService">
+		<property name="operateDAO">
+			<ref bean="OperateDAO" />
+		</property>
+	</bean>
+	
+	<!-- ============BorrowReturn即借出归还管理 =============== -->
+	<bean id="BorrowReturnDAO" class="com.zssy.sbwx.manage.dao.BorrowReturnDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BorrowReturnService"
+		class="com.zssy.sbwx.manage.service.BorrowReturnService">
+		<property name="dao">
+			<ref bean="BorrowReturnDAO" />
+		</property>
+	</bean>
+	<bean name="borrowDeviceBean" class="com.zssy.sbwx.manage.web.BorrowReturnAction"
+		scope="prototype">
+		<property name="BRService">
+			<ref bean="BorrowReturnService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+	</bean>
+	<bean name="borrowReturnDeleteBean" class="com.zssy.sbwx.manage.web.BorrowReturnAction"
+		scope="prototype">
+		<property name="BRService">
+			<ref bean="BorrowReturnService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="borrowReturnListBean" class="com.zssy.sbwx.manage.web.BorrowReturnAction"
+		scope="prototype">
+		<property name="BRService">
+			<ref bean="BorrowReturnService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="borrowReturnEditBean" class="com.zssy.sbwx.manage.web.BorrowReturnAction"
+		scope="prototype">
+		<property name="BRService">
+			<ref bean="BorrowReturnService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="returnDeviceBean" class="com.zssy.sbwx.manage.web.BorrowReturnAction"
+		scope="prototype">
+		<property name="BRService">
+			<ref bean="BorrowReturnService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+	</bean>
+	<bean name="borrowReturnFindByIdBean" class="com.zssy.sbwx.manage.web.BorrowReturnAction"
+		scope="prototype">
+		<property name="BRService">
+			<ref bean="BorrowReturnService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="lookborrowReturnBean" class="com.zssy.sbwx.manage.web.BorrowReturnAction"
+		scope="prototype">
+		<property name="BRService">
+			<ref bean="BorrowReturnService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<!-- ===========组织管理 =============== -->
+	<bean id="OrgDAO" class="com.zssy.sbwx.org.dao.OrgDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="orgService"
+		class="com.zssy.sbwx.org.service.OrgService">
+		<property name="dao">
+			<ref bean="OrgDAO" />
+		</property>
+	</bean>
+	<bean name="orgFindByParentIdBean" class="com.zssy.sbwx.org.web.OrgAction"
+		scope="prototype">
+		<property name="orService">
+			<ref bean="orgService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="orgListBean" class="com.zssy.sbwx.org.web.OrgAction"
+		scope="prototype">
+		<property name="orService">
+			<ref bean="orgService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	
+	<bean name="getTreeNodeBean" class="com.zssy.sbwx.org.web.OrgAction"
+		scope="prototype">
+		<property name="orService">
+			<ref bean="orgService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	
+	<bean name="searchBean" class="com.zssy.sbwx.org.web.OrgAction"
+		scope="prototype">
+		<property name="orService">
+			<ref bean="orgService" />
+		</property>
+	</bean>
+	
+	
+	<!--================ 设备管理模块================= -->
+	<!-- 设备入库管理 -->
+	<bean id="DeviceReserveDAO"
+		class="com.zssy.sbwx.manage.dao.DeviceReserveDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DeviceReserveService"
+		class="com.zssy.sbwx.manage.service.DeviceReserveService">
+		<property name="deviceReserveDAO">
+			<ref bean="DeviceReserveDAO" />
+		</property>
+	</bean>
+	<bean name="addDeviceReserveBean"
+		class="com.zssy.sbwx.manage.web.DeviceReserveAction"
+		scope="prototype">
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="listAllDeviceBean"
+		class="com.zssy.sbwx.manage.web.DeviceReserveAction"
+		scope="prototype">
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="viewDeviceBean"
+		class="com.zssy.sbwx.manage.web.DeviceReserveAction"
+		scope="prototype">
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="editDeviceBean"
+		class="com.zssy.sbwx.manage.web.DeviceReserveAction"
+		scope="prototype">
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="updateDeviceBean"
+		class="com.zssy.sbwx.manage.web.DeviceReserveAction"
+		scope="prototype">
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="logicDeleteDeviceBean"
+		class="com.zssy.sbwx.manage.web.DeviceReserveAction"
+		scope="prototype">
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+		<bean name="goBorrowDeviceBean" class="com.zssy.sbwx.manage.web.DeviceReserveAction"
+		scope="prototype">
+		<property name="deviceReserveService">
+			<ref bean="DeviceReserveService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	
+	
+	<!-- ================维修管理模块==================== -->
+	<bean id="RepairDAO"
+		class="com.zssy.sbwx.repair.dao.RepairDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RepairService"
+		class="com.zssy.sbwx.repair.service.RepairService">
+		<property name="repairDAO">
+			<ref bean="RepairDAO" />
+		</property>
+	</bean>
+	<bean name="addRepairViewBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="addOtherRepairViewBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="addRepairBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="listWaitingRepairBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="addToMyRepairBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="listMyRepairBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="completeRepairViewBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="saveCompleteRepairBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="listRepairResultBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="returnDeviceToOfficesViewBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="returnDeviceToOfficesBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="outMyRepairBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	<bean name="listMyRepairResultBean"
+		class="com.zssy.sbwx.repair.web.RepairAction"
+		scope="prototype">
+		<property name="repairService">
+			<ref bean="RepairService" />
+		</property>
+		<property name="operateService">
+			<ref bean="OperateService" />
+		</property>
+	</bean>
+	
+	
+	<!-- ================记事本模块==================== -->
+	<bean id="NoteBookDAO"
+		class="com.zssy.sbwx.notebook.dao.NoteBookDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NoteBookService"
+		class="com.zssy.sbwx.notebook.service.NoteBookService">
+		<property name="noteBookDAO">
+			<ref bean="NoteBookDAO" />
+		</property>
+	</bean>
+	<bean name="addNoteBookBean"
+		class="com.zssy.sbwx.notebook.web.NoteBookAction"
+		scope="prototype">
+		<property name="noteBookService">
+			<ref bean="NoteBookService" />
+		</property>
+	</bean>
+	<bean name="listMyNoteBookBean"
+		class="com.zssy.sbwx.notebook.web.NoteBookAction"
+		scope="prototype">
+		<property name="noteBookService">
+			<ref bean="NoteBookService" />
+		</property>
+		
+	</bean>
+	<bean name="updateCompleteFlagBean"
+		class="com.zssy.sbwx.notebook.web.NoteBookAction"
+		scope="prototype">
+		<property name="noteBookService">
+			<ref bean="NoteBookService" />
+		</property>
+	</bean>
+	<bean name="editNoteBookBean"
+		class="com.zssy.sbwx.notebook.web.NoteBookAction"
+		scope="prototype">
+		<property name="noteBookService">
+			<ref bean="NoteBookService" />
+		</property>
+	</bean>
+	<bean name="updateNoteBookBean"
+		class="com.zssy.sbwx.notebook.web.NoteBookAction"
+		scope="prototype">
+		<property name="noteBookService">
+			<ref bean="NoteBookService" />
+		</property>
+	</bean>
+	<bean name="deleteNoteBookBean"
+		class="com.zssy.sbwx.notebook.web.NoteBookAction"
+		scope="prototype">
+		<property name="noteBookService">
+			<ref bean="NoteBookService" />
+		</property>
+	</bean>
+
+
+</beans>

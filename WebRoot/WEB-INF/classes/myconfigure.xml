@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+<!-- 	<include file="mydefault.xml" /> -->
+<include file="struts-default.xml" />
+	<package name="sbwx" extends="struts-default" namespace="/">
+		<action name="userAdd" class="addUserBean" method="userAdd">
+			<result name="success" type="redirect">
+				userList.action
+			</result>
+		</action>
+		<action name="userList" class="listUserBean"
+			method="userList">
+			<result name="success">/user/userList.jsp</result>
+		</action>
+		<action name="userDelete" class="deleteUserBean"
+			method="userDelete">
+			<result name="success" type="redirect">
+				userList.action
+			</result>
+		</action>
+		<action name="userEdit" class="editUserBean"
+			method="userEdit">
+			<result name="success">/user/userEdit.jsp</result>
+		</action>
+		<action name="userUpdate" class="updateUserBean"
+			method="userUpdate">
+			<result name="success" type="redirect">
+				userList.action
+			</result>
+		</action>
+		<!-- 登录
+  		<action name="login" class="loginBean"
+			method="login">
+			<result name="success" >
+			/public/index.jsp
+			</result>
+		</action>
+		   -->
+		<action name="logout" class="logoutBean"
+			method="logout">
+			<result name="success" >
+			/login.jsp
+			</result>
+		</action>
+		<!-- =============  BorrowReturn 借出归还模块 ============== -->
+
+		<action name="borrowDevice" class="borrowDeviceBean"
+			method="borrowDevice">
+			<result name="success" type="redirect">
+				borrowReturnList.action
+			</result>
+		</action>
+		<action name="borrowReturnDelete" class="borrowReturnDeleteBean"
+			method="borrowReturnDelete">
+			<result name="success" type="redirect">
+				borrowReturnList.action
+			</result>
+		</action>
+		<action name="borrowReturnList" class="borrowReturnListBean"
+			method="borrowReturnList">
+			<result name="success">/manage/borrowReturnList.jsp</result>
+		</action>
+		<action name="borrowReturnEdit" class="borrowReturnEditBean"
+			method="borrowReturnEdit">
+			<result name="success" type="redirect">
+				borrowReturnList.action
+			</result>
+		</action>
+		<action name="returnDevice" class="returnDeviceBean"
+			method="returnDevice">
+			<result name="success" type="redirect">
+				borrowReturnList.action
+			</result>
+		</action>
+		<action name="borrowReturnFindById"
+			class="borrowReturnFindByIdBean" method="borrowReturnFindById">
+			<result name="success">/manage/deviceReturn.jsp</result>
+		</action>
+		<action name="lookborrowReturn"
+			class="lookborrowReturnBean" method="lookborrowReturn">
+			<result name="success">/manage/lookBorrowReturn.jsp</result>
+		</action>
+
+		<!-- ============= Org 组织结构模块 ============== -->
+
+		<action name="orgFindByParentId" class="orgFindByParentIdBean"
+			method="orgFindByParentId">
+			<result name="success">/org/orgList.jsp</result>
+		</action>
+		<action name="orgList" class="orgListBean" method="orgList">
+			<result name="success">/org/orgList.jsp</result>
+		</action>
+		<action name="search" class="searchBean" method="search">
+		</action>
+
+
+		<!--========== 设备管理（入库管理） ============-->
+		<action name="addDeviceReserve" class="addDeviceReserveBean"
+			method="addDeviceReserve">
+			<result name="success" type="redirect">
+				listAllDevice.action
+			</result>
+		</action>
+		<action name="listAllDevice" class="listAllDeviceBean"
+			method="listAllDevice">
+			<result name="success">
+				/manage/listDeviceReserve.jsp
+			</result>
+		</action>
+		<action name="viewDevice" class="viewDeviceBean"
+			method="viewDevice">
+			<result name="success">
+				/manage/viewDeviceReserve.jsp
+			</result>
+		</action>
+		<action name="editDevice" class="editDeviceBean"
+			method="editDevice">
+			<result name="success">
+				/manage/editDeviceReserve.jsp
+			</result>
+		</action>
+		<action name="updateDevice" class="updateDeviceBean"
+			method="updateDevice">
+			<result name="success" type="redirect">
+				listAllDevice.action
+			</result>
+		</action>
+		<action name="logicDeleteDevice" class="logicDeleteDeviceBean"
+			method="logicDeleteDevice">
+			<result name="success" type="redirect">
+				listAllDevice.action
+			</result>
+		</action>
+		<action name="goBorrowDevice"
+			class="goBorrowDeviceBean" method="goBorrowDevice">
+			<result name="success">/manage/deviceBorrow.jsp</result>
+		</action>
+		
+		<!-- ===============维修管理=================== -->
+		<action name="addRepairView" class="addRepairViewBean"
+			method="addRepairView">
+			<result name="success">
+				/repair/addRepair.jsp
+			</result>
+		</action>
+		<action name="addOtherRepairView" class="addOtherRepairViewBean"
+			method="addOtherRepairView">
+			<result name="success">
+				/repair/addOtherRepair.jsp
+			</result>
+		</action>
+		<action name="addRepair" class="addRepairBean"
+			method="addRepair">
+			<result name="success" type="redirect">
+				listWaitingRepair.action
+			</result>
+		</action>
+		<action name="listWaitingRepair" class="listWaitingRepairBean"
+			method="listWaitingRepair">
+			<result name="success">
+				/repair/addRepairing.jsp
+			</result>
+		</action>
+		<action name="addToMyRepair" class="addToMyRepairBean"
+			method="addToMyRepair">
+			<result name="success" type="redirect">
+				listMyRepair.action
+			</result>
+		</action>
+		<action name="listMyRepair" class="listMyRepairBean"
+			method="listMyRepair">
+			<result name="success">
+				/repair/myRepairing.jsp
+			</result>
+		</action>
+		<action name="completeRepairView" class="completeRepairViewBean"
+			method="completeRepairView">
+			<result name="success">
+				/repair/completeRepair.jsp
+			</result>
+		</action>
+		<action name="saveCompleteRepair" class="saveCompleteRepairBean"
+			method="saveCompleteRepair">
+			<result name="success" type="redirect">
+				listMyRepair.action
+			</result>
+		</action>
+		<action name="listRepairResult" class="listRepairResultBean"
+			method="listRepairResult">
+			<result name="success">
+				/repair/repairResult.jsp
+			</result>
+		</action>
+		<action name="returnDeviceToOfficesView" class="returnDeviceToOfficesViewBean"
+			method="returnDeviceToOfficesView">
+			<result name="success">
+				/repair/returnDevice.jsp
+			</result>
+		</action>
+		<action name="returnDeviceToOffices" class="returnDeviceToOfficesBean"
+			method="returnDeviceToOffices">
+			<result name="success" type="redirect">
+				listRepairResult.action
+			</result>
+		</action>
+		<action name="outMyRepair" class="outMyRepairBean"
+			method="outMyRepair">
+			<result name="success" type="redirect">
+				listMyRepair.action
+			</result>
+		</action>
+		<action name="listMyRepairResult" class="listMyRepairResultBean"
+			method="listMyRepairResult">
+			<result name="success">
+				/repair/myRepairResult.jsp
+			</result>
+		</action>
+		
+		
+		<!-- ===============记事本=================== -->
+		<action name="addNoteBook" class="addNoteBookBean"
+			method="addNoteBook">
+			<result name="success" type="redirect">
+				listMyNoteBook.action
+			</result>
+		</action>
+		<action name="listMyNoteBook" class="listMyNoteBookBean"
+			method="listMyNoteBook">
+			<result name="success">
+				/notebook/listNoteBook.jsp
+			</result>
+		</action>
+		<action name="updateCompleteFlag" class="updateCompleteFlagBean"
+			method="updateCompleteFlag">
+			<result name="success" type="redirect">
+				listMyNoteBook.action
+			</result>
+		</action>
+		<action name="editNoteBook" class="editNoteBookBean"
+			method="editNoteBook">
+			<result name="success">
+				/notebook/editNoteBook.jsp
+			</result>
+		</action>
+		<action name="updateNoteBook" class="updateNoteBookBean"
+			method="updateNoteBook">
+			<result name="success" type="redirect">
+				listMyNoteBook.action
+			</result>
+		</action>
+		<action name="deleteNoteBook" class="deleteNoteBookBean"
+			method="deleteNoteBook">
+			<result name="success" type="redirect">
+				listMyNoteBook.action
+			</result>
+		</action>
+	</package>
+</struts>
+

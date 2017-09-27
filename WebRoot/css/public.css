@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+/*列表样式*/
+.km_tablist thead td{background-color:#edf2f5; height:24px; line-height:24px; color:#666666;}
+.km_tablist tbody td{background-color:#fff; height:24px;line-height:24px;}
+
+/*表格底色*/
+.bgeee{ background-color:#eee;}
+.bgblue{ background-color:#7FFFD4;}
+.tdbg{ background-color: #efeefe; }
+.tdbg_title{ background-color: #e8eff8; }

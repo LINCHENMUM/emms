@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* 业务管理--弹出层样式表 */
+
+
+.tabhead{ background-image: url(../_images/viewico/tabheadbg.jpg); background-repeat: repeat-x; height: 23px; cursor: move; }
+

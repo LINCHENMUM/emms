@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* 后台管理功能样式 */
+
+*{ margin: 0px; padding: 0px; font-size:12px; }
+a{color:#2871e9;}
+a:hover{color:#ef6102;}
+img{ border:none;}
+/*常用字体颜色*/
+.yellow{ color:#FF9900;}
+.green{ color:#008001;}
+.red{ color:#c60a00;}
+.redd{ color:#f23f16;}
+.blue{ color:#2871e9;}
+.bluee{ color:#346a96;}
+.gray{ color:#333;}
+.grayy{ color:#666;}
+.grayyy{ color:#999;}
+.black{color:#222;}
+
+.bb{ font-weight: bold; }
+/*常用字号*/
+.font12{ font-size: 12px; }
+.font13{font-size: 13px;}
+.font14{font-size: 14px;}
+.font15{font-size: 15px;}
+.font15{font-size: 16px;}
+
+/*是否要下划线*/
+.underline{ text-decoration: underline; }
+.lessline{ text-decoration: none; }
+
+/*确定与取消文字样式*/
+.submit{ font-size: 13px; line-height: 18px; padding-right: 3px; padding-left: 3px; }
+.rest{ font-size: 13px;line-height: 22px; text-decoration: underline; color:#333;}
+
+/*不换行样式,只应用于label里*/
+.oneline{ white-space: nowrap; margin-right: 5px;}
+
+/*表格底色*/
+.bgeee{ background-color:#eee;}
+.bgblue{ background-color:#f6f8f9;}
+
+/*页签样式*/
+.tabox{ border-bottom: 1px solid #9bb4dc;  }
+.tabs{ height: 24px;}
+	.tabs ul{ margin-left: 15px; }
+		.tabs li{ width:90px; height:23px; float: left; margin-right: 4px; cursor: pointer; text-align: center; line-height: 24px; border: 1px solid #9bb4dc; background-color:#f1f6fc; padding-right: 3px; padding-left: 3px; }
+			.tabs li a{ font-size: 12px; color: #222; text-decoration: none; white-space: nowrap; }
+			.tabs li a:active{color: #ef6102;}
+			.tabs li.tabOn{ background-color:#FFFFFF;  height:24px; margin-bottom:1px;border-top: 1px solid #9bb4dc; border-left: 1px solid #9bb4dc; border-right: 1px solid #9bb4dc; border-bottom: 1px solid #ffffff; padding-right: 3px; padding-left: 3px; }/*页签的当前状态*/
+			.tabs li.tabOn a{color: #36c; white-space: nowrap;}
+
+/*列表样式*/
+.km_tablist thead td{ background-color:#edf2f5; height:24px; line-height:24px; color:#666666;}
+.km_tablist tbody td{background-color:#fff; height:24px;line-height:24px;}
+

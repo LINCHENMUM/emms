@@ -1,0 +1,17 @@
+#Fri Apr 15 14:38:48 CST 2011
+eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/log4j.properties=GBK
+encoding//WebRoot/js/BeginEndDate.js=UTF-8
+encoding//WebRoot/js/BeginEndDateTime.js=GBK
+encoding//WebRoot/js/DateHelper.js=UTF-8
+encoding//WebRoot/js/DateTimeHelper.js=UTF-8
+encoding//WebRoot/js/indexNeed.js=GBK
+encoding//WebRoot/js/manage/borrowReturnList.js=GBK
+encoding//WebRoot/js/manage/deviceManage.js=GBK
+encoding//WebRoot/js/page.js=GBK
+encoding//WebRoot/js/xtree.js=UTF-8
+encoding//WebRoot/login.jsp=GBK
+encoding//WebRoot/manage/borrowReturnList.jsp=GBK
+encoding//WebRoot/public/index.jsp=GBK
+encoding//WebRoot/public/leftmenu_device.jsp=UTF-8
+encoding//WebRoot/public/leftmenu_report.jsp=UTF-8

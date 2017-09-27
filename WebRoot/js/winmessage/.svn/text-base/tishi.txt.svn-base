@@ -1,0 +1,6 @@
+//错误提示
+parent.ymPrompt.alert({message:response,handler:null});
+//成功提示
+parent.ymPrompt.succeedInfo({message:response,width:null,height:null,handler:null});
+//询问提示
+parent.ymPrompt.confirmInfo({message:'确定要删除吗？',handler:function(i){if(i=="ok")  function()}});

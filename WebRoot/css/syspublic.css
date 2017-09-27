@@ -1,0 +1,115 @@
+@charset "utf-8";
+/* 公用样式表 */
+* { margin:0; padding:0; font-family: Arial;  }
+	ol, ul {list-style: none;}
+	img { border: 0;}
+html,body{height:100%; min-width:760px; }
+
+/*颜色字体*/
+.red{ color:#ff0000;}
+.green_x{ color:#08b300;}
+.green_g{ color:#009e77;}
+.blue{ color:#0033FF;}
+.gray{ color:#222;}
+.graym{ color:#666;}
+.region{ color:#000000; font-size: 12px; }
+.date{color:#666666;}
+.font12{ font-size: 12px; }
+.font13{font-size: 13px;}
+.font14{font-size: 14px;}
+.font15{font-size: 15px;}
+.font16{font-size: 16px;}
+.bold{ font-weight: bold; }
+.yellow{ color: #FF9900; }
+
+/*带下划线样式*/
+.lessline{ text-decoration: none; }
+.haveline{ text-decoration: underline; }
+
+/*输入框及按钮样式*/
+.inp2,.inp3,{ background-image: url(../_images/inputbg.jpg); background-repeat: no-repeat; height:33px; border: none; margin-right: 4px; font-size: 14px; font-weight: bold;}
+.inp2{ width:67px; background-position: 0px 0px; color:#333;  }
+	.inp2:hover{ background-position: -67px 0px; color:#111;}
+.inp3{ width:94px; background-position: 0px -33px; color:#333; }
+	.inp3:hover{ background-position: -94px -33px; color:#111; }
+	
+/*取消文字样式*/
+.submit{ font-size: 13px; line-height: 18px; padding-right: 3px; padding-left: 3px; }
+.rest{ font-size: 13px;line-height: 22px; text-decoration: underline; color:#333;}
+
+
+/*作间隔用*/
+.h_3px{ height:3px; line-height: 1px; margin: 0px; padding: 0px; }
+.h_5px{ height:5px; line-height: 1px; margin: 0px; padding: 0px; }
+.h_10px{ height:10px;line-height: 1px; margin: 0px; padding: 0px;}
+
+/*作行高用*/
+.h_22px{height:22px; line-height:22px}
+.h_26px{height:26px; line-height:26px}
+.h_30px{height:30px; line-height:30px}
+.h_40px{height:40px; line-height:40px}
+
+/*分页样式*/
+.pager{ text-align:center; line-height:20px; clear:both; font-size: 12px; }
+	.pager li{ display:inline; float:none; background:0; white-space: nowrap; }
+	.pager li a,.pager li span{padding:0px 0px;width:auto;float:none;background:0;text-decoration:none;color: #261cdc;}
+	.pager li input.ender{width:3em}.pager li a{border:1px solid #e0e0e0;background:#f5f5f5;width:23px;}
+	.pager li a:hover{text-decoration:none;background:#f0f0f0;border-color:#9ca497;width:23px; color: #ef6102;}
+	.pager li.on{ background:#666; color:#fff; font-weight:bold; border:1px solid #666; margin-right: 3px; line-height:20px; padding-top: 4px; padding-right: 4px; padding-bottom: 2px; padding-left: 4px; }
+	.pager li.first a,.pager li.ender a{background:0;border:0;}
+	.pager li.first a:hover,.pager li.ender a:hover{background:0;border:0;text-decoration:underline; color: #ef6102;}
+	.pager li.first,.pager li.ender{+position:relative;bottom:1px;color: #888;}
+	.pager li.first a,.pager li.ender a{+padding-top:4px;}
+
+
+/*页面标题*/
+.pagetitle td{ font-size: 14px; font-weight: bold; line-height: 40px; color: #333333;  }
+
+/*普通页面表格*/
+.pagetable td{  line-height: 20px;  padding-top: 2px; padding-bottom: 2px; }
+.pagetable tr:hover{ background-color:#eee; }
+.pagetable td a{ line-height: 20px; color: #333333;}
+.pagetable td a.blue{ line-height: 20px; color: #0033FF; }
+.pagetable td a.green{  line-height: 20px; color: #08b300; }
+
+/*表格背景色*/
+.tdbg{ background-color: #eee; }
+.tdbg_title{ background-color: #e8eff8; }
+/*能功菜单*/
+.menubar{ background-color: #e8eff8; border: 1px solid #b6c7df; }
+.menubar td{ height: 26px; font-size:12px;  }
+.menubar td label{ margin-right:5px; margin-left: 5px; }
+.menubar td label a{ color: #333; text-decoration: none; }
+
+/*业务备注*/
+.art_remark{ background-color: #eeeeee; border: 1px solid #d5d5d5; font-size: 14px; line-height: 26px; }
+
+/*知识展示时所属类别的样式*/
+.show_sort{ font-size: 12px; line-height: 25px; color: #333; text-indent: 6px; }
+.show_sort span{color: #888;}
+
+/*知识展示时模板的样式*/
+.art_title{ font-size: 16px; color: #261cdc; line-height: 26px; font-weight: bold; }
+.art_cate{font-size: 12px;color: #888;}
+.art_cate span{ font-size: 12px; color: #000; margin-right: 10px; line-height: 30px;}
+.art_cate a{color: #000;}
+
+/*后台弹出窗口表格样式*/
+.tabhead{ background-image: url(../_images/sysimg/tabheadbg.jpg); background-repeat: repeat-x; height: 23px; cursor: move; }
+
+/*区块里的多选样式*/
+.labelcheckbox{ white-space: nowrap; margin-right: 4px; }
+
+/*页面宽度*/
+.mainwid{ width:95%;}
+
+/*弹出窗口字体大小*/
+.viewfont td{ font-size:13px; }
+.viewfont { z-index: 200; }
+
+/*内容详细行高*/
+
+.bodytxtheight{font-size: 12px;}
+.bodytxtheight a{font-size: 12px;}
+.bodytxtheight div {float:left;}
+.bodytxtheight td{ vertical-align: middle;}

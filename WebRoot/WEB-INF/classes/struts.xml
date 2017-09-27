@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- <include file="mydefault.xml" /> -->
+	<include file="login.xml" />
+	<include file="myconfigure.xml" />
+	<!-- 此constant设置临时文件存放目录，因为默认的default.properties中没有指定 -->
+	<constant name="struts.multipart.saveDir" value="c:\"></constant>
+	
+	<!-- 此常量是设置去除 struts2 标签中的自动生成的布局样式 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.ui.templateDir" value="template" />
+	<constant name="struts.ui.templateSuffix" value="ftl" />
+	<!-- 将action托管给spring -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+	
+	<!-- <constant name="struts.action.extension" value=".action"></constant> -->
+	
+</struts>
+

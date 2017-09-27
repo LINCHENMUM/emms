@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* 业务管理--框架样式 */
+
+*{ margin: 0px; padding: 0px; font-size: 12px; }
+
+/*头部样式*/
+.top{ background-image: url(../_images/sysico/topbg.jpg); background-repeat: repeat-x; height:35px; }
+.topmenu{ font-size:14px;}
+	.topmenu a{font-size:14px; margin-right: 6px; text-decoration: none; color:#524d52; }
+	.topmenu a:hover{ color:#346a96;text-decoration: underline; }
+	.topmenu a.on{font-size:14px; text-decoration: none; color:#346a96; background-image: url(../_images/pre_top_ico.gif); background-repeat: no-repeat; background-position: left top; padding-left: 8px; }
+
+/*左侧菜单样式*/
+.leftmenu td{ height: 24px; border-bottom: 1px solid #ceddf0; line-height: 25px; }
+.leftmenu tr#on{ background-color: #e8eff8; }
+.leftmenu tr:hover{ background-color: #e8eff8;}
+.leftmenu td a{ color: #385da5; text-decoration: none; }
+.leftmenu td a:hover{color:#F60; text-decoration: none;}
